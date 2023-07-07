@@ -1,0 +1,123 @@
+---
+name: Deploy
+
+# Only one workflow can run at a time
+# If there is newer workflow in progress, cancel older ones
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+# Put 'on' in quotes to avoid YAML parsing error
+"on":
+  # Enable manual triggering
+  workflow_dispatch: {}
+  # Run on commits to main branch
+  push:
+    branches:
+      - main
+    paths:
+      - "copier.yaml"
+      - "*.nix"
+      - "flake.lock"
+      - "src/**"
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".npmrc"
+      - "vite.config.ts"
+      - "tsconfig.json"
+      - "Taskfile.dist.yaml"
+      - ".github/workflows/deploy.yaml"
+
+jobs:
+  build:
+    name: Build
+    # Pin version of Ubuntu to avoid breaking changes
+    runs-on: ubuntu-22.04
+    # Use reasonable timeout to avoid stuck workflows
+    timeout-minutes: 5
+    env:
+      NIX_CACHE_DIR: /home/runner/.nixcache
+      PNPM_CACHE_DIR: /home/runner/.pnpmcache
+    permissions:
+      # Needed to checkout code
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Setup Nix cache
+        uses: actions/cache@v3.3.1
+        id: cache-nix
+        with:
+          path: ${{ env.NIX_CACHE_DIR }}
+          key: deploy-nix
+      - name: Setup PNPM cache
+        uses: actions/cache@v3.3.1
+        with:
+          path: ${{ env.PNPM_CACHE_DIR }}
+          key: deploy-pnpm
+      - name: Install Nix
+        uses: cachix/install-nix-action@v21
+        with:
+          github_access_token: ${{ github.token }}
+          install_url: https://releases.nixos.org/nix/nix-2.15.1/install
+      # See: https://github.com/cachix/install-nix-action/issues/56
+      - name: Import Nix store cache
+        if: steps.cache-nix.outputs.cache-hit == 'true'
+        run: >
+          nix-store
+          --import
+          < ${{ env.NIX_CACHE_DIR }}/archive.nar
+      - name: Build
+        env:
+          NPM_CONFIG_STORE_DIR: ${{ env.PNPM_CACHE_DIR }}
+          REACT_EXAMPLE_BASE_URL: "/${{ github.event.repository.name }}/"
+          REACT_EXAMPLE_BUILD_DIR: build
+        run: >
+          nix
+          develop
+          .#build
+          --command
+          --
+          task
+          build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3.0.6
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1.0.8
+        with:
+          path: build
+      # See: https://github.com/cachix/install-nix-action/issues/56
+      - name: Export Nix store cache
+        if: "!cancelled()"
+        run: >
+          mkdir
+          -p
+          ${{ env.NIX_CACHE_DIR }}
+          &&
+          nix-store
+          --export $(find /nix/store -maxdepth 1 -name '*-*')
+          > ${{ env.NIX_CACHE_DIR }}/archive.nar
+  deploy:
+    name: Deploy
+    # Run only if build job succeeded
+    needs: build
+    # Pin version of Ubuntu to avoid breaking changes
+    runs-on: ubuntu-22.04
+    # Use reasonable timeout to avoid stuck workflows
+    timeout-minutes: 5
+    # Use Pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      # Needed to to deploy to Pages
+      pages: write
+      # Also needed to deploy to Pages
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2.0.1

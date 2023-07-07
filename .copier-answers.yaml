@@ -1,0 +1,11 @@
+---
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 91b82ca
+_src_path: ./
+deploy: true
+description: React project example ⚛️
+envprefix: REACT_EXAMPLE
+favicon: ⚛️
+projectname: react-example
+registry: true
+username: quickplates
