@@ -1,0 +1,12 @@
+---
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 70aadab
+_src_path: ./
+deploy: true
+deployurl: https://quickplates.github.io/react-example
+description: React project example ⚛️
+envprefix: REACT_EXAMPLE
+projectname: react-example
+registry: true
+releases: true
+username: quickplates
