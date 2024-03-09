@@ -1,0 +1,43 @@
+{
+  "name": "react-example",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "clean": "rm --recursive --force build/",
+    "update": "ncu --peer --doctor --upgrade && npm i --no-audit --no-fund",
+    "postupdate": "rm -rf .tmp/",
+    "test": "tsc && vite build --outDir .tmp/",
+    "posttest": "rm -rf .tmp/"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.6.1",
+    "@mantine/hooks": "^7.6.1",
+    "@mantine/notifications": "^7.6.1",
+    "@tabler/icons-react": "^2.47.0",
+    "immer": "^10.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.4",
+    "react-router-dom": "^6.22.3",
+    "use-broadcast-ts": "^1.4.4",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.1",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.34.0",
+    "npm-check-updates": "^16.14.15",
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5"
+  }
+}

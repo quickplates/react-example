@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 31aaeba
+_src_path: ./
+accountname: quickplates
+appname: react-example
+description: React app example ⚛️
+docs: true
+docsurl: https://quickplates.github.io/react-example
+envprefix: REACT_EXAMPLE
+imagename: apps/react-example
+port: 5173
+registry: true
+releases: true
+reponame: react-example
+repourl: https://github.com/quickplates/react-example
