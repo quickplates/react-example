@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-11-09 16:23+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/views/root/root-page-view/main.tsx:34
+msgid "Click me!"
+msgstr "Click me!"
+
+#: src/app/error.tsx:13
+msgid "Error"
+msgstr "Error"
+
+#: src/app/error.tsx:14
+msgid "Error • react-example"
+msgstr "Error • react-example"
+
+#: src/app/error.tsx:18
+#: src/app/not-found.tsx:18
+#: src/app/page.tsx:13
+#: src/app/page.tsx:18
+msgid "react-example"
+msgstr "react-example"
+
+#: src/hooks/use-toasts/main.tsx:29
+msgid "Info"
+msgstr "Info"
+
+#: src/app/not-found.tsx:13
+msgid "Not Found • react-example"
+msgstr "Not Found • react-example"
+
+#: src/components/views/root/root-not-found-view/main.tsx:9
+msgid "Page not found"
+msgstr "Page not found"
+
+#: src/components/views/root/root-error-view/main.tsx:9
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+#: src/hooks/use-toasts/main.tsx:41
+msgid "Success"
+msgstr "Success"
+
+#: src/hooks/use-toasts/main.tsx:53
+msgid "Warning"
+msgstr "Warning"
