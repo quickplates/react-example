@@ -1,0 +1,9 @@
+services:
+  react-example:
+    build:
+      context: ./
+      network: host
+    environment:
+      - "REACT_EXAMPLE__SERVER__HOST=${REACT_EXAMPLE__SERVER__HOST:-0.0.0.0}"
+      - "REACT_EXAMPLE__SERVER__PORT=${REACT_EXAMPLE__SERVER__PORT:-5173}"
+    network_mode: host

@@ -1,0 +1,49 @@
+{
+  "name": "react-example",
+  "private": true,
+  "scripts": {
+    "build": "tsc && vite build",
+    "clean": "rm --recursive --force build/",
+    "dev": "vite",
+    "locales": "lingui extract --clean --overwrite",
+    "run": "caddy file-server --root build/ --listen \"${REACT_EXAMPLE__SERVER__HOST:-0.0.0.0}:${REACT_EXAMPLE__SERVER__PORT:-5173}\" --access-log",
+    "test": "tsc && vite build --outDir .tmp/",
+    "posttest": "rm --recursive --force .tmp/",
+    "update": "ncu --peer --doctor --upgrade && npm i --no-audit --no-fund",
+    "postupdate": "rm --recursive --force .tmp/"
+  },
+  "dependencies": {
+    "@lingui/react": "^5.2.0",
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
+    "@mantine/notifications": "^7.17.0",
+    "@tabler/icons-react": "~3.17.0",
+    "immer": "^10.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.2.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@lingui/babel-plugin-lingui-macro": "^5.2.0",
+    "@lingui/cli": "^5.2.0",
+    "@lingui/format-po": "^5.2.0",
+    "@lingui/vite-plugin": "^5.2.0",
+    "@types/node": "^20.17.19",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint-plugin-lingui": "^0.10.0",
+    "eslint-plugin-perfectionist": "^4.9.0",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
+    "npm-check-updates": "^17.1.14",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.1.1"
+  }
+}
